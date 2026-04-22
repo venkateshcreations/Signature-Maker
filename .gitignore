@@ -3,6 +3,10 @@ node_modules/
 .pnp
 .pnp.js
 
+# Internal tool folders (never commit these)
+.superpowers/
+.gemini/
+
 # Next.js build output
 .next/
 out/
