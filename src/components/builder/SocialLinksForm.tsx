@@ -70,7 +70,13 @@ export default function SocialLinksForm() {
   const { signature, updateSignature } = useSignatureStore();
 
   const updateSocial = (type: string, updates: Partial<SocialLink>) => {
-    const socials = signature.socials.map(s => s.type === type ? { ...s, ...updates } : s);
+    const exists = signature.socials.find(s => s.type === type);
+    let socials: SocialLink[];
+    if (exists) {
+      socials = signature.socials.map(s => s.type === type ? { ...s, ...updates } : s);
+    } else {
+      socials = [...signature.socials, { id: type, type: type as SocialLink['type'], url: '', enabled: false, ...updates }];
+    }
     updateSignature({ socials });
   };
 
